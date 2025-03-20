@@ -1,16 +1,18 @@
 #!/bin/bash
 
-ANDROID_FOLDER="/storage/emulated/0/files/"
+#ANDROID_FOLDER="/storage/emulated/0/files/"
+ANDROID_FOLDER="/storage/emulated/0/Music/Recordings/Call\ Recordings/"
 LOCAL_FOLDER="./audio_metadata"
 
 mkdir -p "$LOCAL_FOLDER"
 
+printf "$(adb shell ls "$ANDROID_FOLDER")"
 # Set IFS to handle spaces in filenames
 
 IFS=$'\n'
 
 # Store file list in an array to avoid subshell issues
-mapfile -t files < <(adb shell ls -1 "$ANDROID_FOLDER"/*.wav 2>/dev/null | tr -d '\r')
+mapfile -t files < <(adb shell ls -1 "$ANDROID_FOLDER"/*.mp3 2>/dev/null | tr -d '\r')
 
 # Store file list in a variable to avoid subshell issues
 #files=$(adb shell ls "$ANDROID_FOLDER"/*.wav 2>/dev/null | tr -d '\r')
